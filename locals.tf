@@ -1,5 +1,6 @@
 locals {
-  prefix = "JHCorp_"    
+  prefix = "JHCorp"
+  env    = "Dev"
   
   default_tags = {
     # 계열사 구분

@@ -1,25 +1,26 @@
-resource "aws_vpc" "main" {
+resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr
-  tags = merge(local.default_tags, {
+  tags = merge(var.default_tags, {
     Name = var.vpc_name
   })
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main.id
-  tags = merge(local.default_tags, {
+  vpc_id = aws_vpc.vpc.id
+  tags = merge(var.default_tags, {
     Name = var.igw_name
   })
 }
 
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public.id
-  tags = merge(local.default_tags, {
+  # subnet_id     = aws_subnet.public_subnet.id
+  subnet_id     = aws_subnet.public_subnet["JHCorp_Stg_Subnet_PU_AZ"].id
+  tags = merge(var.default_tags, {
     Name = var.nat_name
   })
   depends_on = [aws_internet_gateway.igw]
