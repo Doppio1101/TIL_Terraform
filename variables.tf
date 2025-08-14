@@ -61,6 +61,12 @@ variable "nat_name" {
   default     = "JHCorp_Dev_NAT_AZ"
 }
 
+variable "nat_count" {
+  description = "NAT Gateway Count"
+  type        = number
+  default     = 1
+}
+
 variable "public_subnet" {
   description = "List of Public Subnet CIDRs"
   type        = list(object({

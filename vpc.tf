@@ -18,8 +18,9 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
+  count = var.nat_count
   # subnet_id     = aws_subnet.public_subnet.id
-  subnet_id     = aws_subnet.public_subnet["JHCorp_Stg_Subnet_PU_AZ"].id
+  subnet_id     = aws_subnet.public_subnet[count.index].id
   tags = merge(var.default_tags, {
     Name = var.nat_name
   })

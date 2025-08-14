@@ -8,6 +8,7 @@ vpc_name = "JHCorp_Dev_VPC_10_225_0_CIDR22"
 vpc_cidr = "10.225.0.0/22"
 igw_name = "JHCorp_Dev_IGW"
 nat_name = "JHCorp_Dev_NAT_AZ"
+nat_count = 1
 public_subnet = [
   {
     name = "JHCorp_Dev_Subnet_PU_AZ"
